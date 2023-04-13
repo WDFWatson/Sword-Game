@@ -15,10 +15,12 @@ public class TargetArea : MonoBehaviour
         
         if (angleDiff >= 90 - threshold)
         {
+            PlayerManager.instance.Score();
             EffectManager.instance.Clash();
         }
         else
         {
+            PlayerManager.instance.TakeDamage();
             EffectManager.instance.Damage();
         }
 

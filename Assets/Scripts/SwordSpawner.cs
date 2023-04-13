@@ -21,6 +21,7 @@ public class SwordSpawner : MonoBehaviour
         {
             var newSword = Instantiate(swordPrefab) as SwordController;
             float angle = Random.Range(-90, 90);
+            
             newSword.transform.position = transform.position;
             newSword.SetRotation(angle);
             newSword.rb.velocity = Vector3.back * swordSpeed;
