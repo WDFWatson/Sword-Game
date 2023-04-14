@@ -2,13 +2,17 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class PlayerManager : MonoBehaviour
 {
+    public GameOverMenu gameOverMenu;
     public int health = 5;
+    
 
     [HideInInspector] public int score = 0;
-    [HideInInspector]  int streak = 0;
+    [HideInInspector]  public int streak = 0;
+    [HideInInspector] public int maxStreak = 0;
 
     public static PlayerManager instance;
 
@@ -27,20 +31,40 @@ public class PlayerManager : MonoBehaviour
     public void TakeDamage()
     {
         health--;
+        if (streak > maxStreak)
+        {
+            maxStreak = streak;
+        }
         streak = 0;
         if (health <= 0)
         {
-            Debug.Log("You Died");
+            Die();
         }
-        Debug.Log(health);
     }
 
     public void Score()
     {
         score++;
         streak++;
-        Debug.Log(score);
-        Debug.Log(streak);
+    }
+
+    public void Die()
+    {
+        gameOverMenu.gameObject.SetActive(true);
+        gameOverMenu.setScore(score);
+        gameOverMenu.setMaxStreak(maxStreak);
+        TargetArea.instance.gameObject.SetActive(false);
+        InputController.instance.sword.transform.position = new Vector3(0, 0, 20);
+    }
+
+    public void Restart()
+    {
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+    }
+
+    public void Quit()
+    {
+        Application.Quit();
     }
     
 }

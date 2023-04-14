@@ -42,27 +42,11 @@ public class InputController : MonoBehaviour
         {
             angle -= 360;
         }
-
-        /*if (Input.GetButtonDown("Fire1"))
-        {
-            if (timeLeftParry < delayThreshold)
-            {
-                EffectManager.instance.Parry();
-                timeLeftParry = parryWindowLength;
-            }
-        }*/
+        
     }
 
     private void FixedUpdate()
     {
         sword.SetRotation(angle);
-        /*if (timeLeftParry > 0)
-        {
-            timeLeftParry -= Time.fixedDeltaTime;
-        }
-        else
-        {
-            timeLeftParry = 0;
-        }*/
     }
 }

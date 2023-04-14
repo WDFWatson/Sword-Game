@@ -6,6 +6,21 @@ using UnityEngine;
 public class TargetArea : MonoBehaviour
 {
     public float threshold = 10f;
+
+    public static TargetArea instance;
+
+    private void Awake()
+    {
+        if (instance == null)
+        {
+            instance = this;
+        }
+        else
+        {
+            Destroy(this);
+        }
+    }
+
     private void OnTriggerEnter(Collider other)
     {
         var sword = other.gameObject.GetComponent<SwordController>();

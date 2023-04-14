@@ -21,8 +21,6 @@ public class EffectManager : MonoBehaviour
         {
             Destroy(this);
         }
-
-
     }
 
     private void Start()
@@ -38,11 +36,6 @@ public class EffectManager : MonoBehaviour
         }
     }
 
-    /*public void Parry()
-    {
-        swordAnimator.SetTrigger("Parry");
-    }*/
-    
     public void Clash()
     {
         swordAnimator.SetTrigger("Parry");
