@@ -2739,8 +2739,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   swordSpeed: 2
-  minTimeBetweenSpawns: 0.1
-  maxTimeBetweenSpawns: 1
+  minTimeBetweenSpawns: 0.2
+  maxTimeBetweenSpawns: 2
+  minTimeBetweenSpawnsMinimum: 0.05
+  maxTimeBetweenSpawnsMinimum: 0.5
+  timeBetweenRateIncreases: 5
+  timeChangeMaximum: 0.01
+  timeChangeMinimum: 0.05
   swordPrefab: {fileID: 1458550107801317753, guid: 5f6e8f813fd271c4e896180bc396c9e7, type: 3}
 --- !u!4 &1915180121
 Transform:
