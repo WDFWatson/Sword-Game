@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -8,8 +9,20 @@ public class PlayfabManager : MonoBehaviour
 {
     public static PlayfabManager instance;
 
-    private int currentScoreStored;
-    private int currentMaxStreakStored;
+    public int CurrentScoreStored
+    {
+        get;
+        private set;
+    }
+
+    public Action scoreEvent;
+    public int CurrentMaxStreakStored
+    {
+        get;
+        private set;
+    }
+
+    public Action maxStreakEvent;
     void Awake()
     {
         if (instance != null && instance != this)
@@ -86,7 +99,7 @@ public class PlayfabManager : MonoBehaviour
     {
         Debug.Log("Leaderboard Modified Successfully");
     }
-    public int GetScore()
+    public void GetScore()
     {
         var request = new GetPlayerStatisticsRequest
         {
@@ -96,15 +109,15 @@ public class PlayfabManager : MonoBehaviour
             }
         };
         PlayFabClientAPI.GetPlayerStatistics(request, OnGetScore, OnError);
-        return currentScoreStored;
     }
 
     void OnGetScore(GetPlayerStatisticsResult result)
     {
-        currentScoreStored = result.Statistics[0].Value;
+        CurrentScoreStored = result.Statistics[0].Value;
+        scoreEvent.Invoke();
     }
     
-    public int GetMaxStreak()
+    public void GetMaxStreak()
     {
         var request = new GetPlayerStatisticsRequest
         {
@@ -114,11 +127,11 @@ public class PlayfabManager : MonoBehaviour
             }
         };
         PlayFabClientAPI.GetPlayerStatistics(request, OnGetMaxStreak, OnError);
-        return currentMaxStreakStored;
     }
 
     void OnGetMaxStreak(GetPlayerStatisticsResult result)
     {
-        currentMaxStreakStored = result.Statistics[0].Value;
+        CurrentMaxStreakStored = result.Statistics[0].Value;
+        maxStreakEvent.Invoke();
     }
 }
