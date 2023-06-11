@@ -8,13 +8,14 @@ public class GameOverMenu : MonoBehaviour
     public TextMeshProUGUI scoreText;
     public TextMeshProUGUI maxStreakText;
 
-    public void setScore(int score)
+    public void Initialize(int score, int maxStreak)
     {
-        scoreText.text = "Score: " + score;
-    }
+        PlayfabManager.instance.ModifyScore(score);
+        PlayfabManager.instance.ModifyMaxStreak(maxStreak);
+        int pbScore = PlayfabManager.instance.GetScore();
+        int pbMaxStreak = PlayfabManager.instance.GetScore();
 
-    public void setMaxStreak(int maxStreak)
-    {
-        maxStreakText.text = "Max Streak: " + maxStreak;
+        scoreText.text = $"Score: {score}\nPersonal Best: {pbScore}";
+        maxStreakText.text = $"Max Streak: {maxStreak}\nPersonal Best: {pbMaxStreak}";
     }
 }

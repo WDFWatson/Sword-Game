@@ -24,7 +24,7 @@ public class TargetArea : MonoBehaviour
     private void OnTriggerEnter(Collider other)
     {
         var sword = other.gameObject.GetComponent<SwordController>();
-        float angleDiff = InputController.instance.angle - sword.angle;
+        float angleDiff = InputController.instance.currentAngle - sword.angle;
 
         angleDiff = ClampAngleDiff(angleDiff);
         
