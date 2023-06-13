@@ -76,7 +76,12 @@ public class PlayfabManager : MonoBehaviour
                 }
             }
         };
-        PlayFabClientAPI.UpdatePlayerStatistics(request, OnModifyLeaderboard, OnError);
+        PlayFabClientAPI.UpdatePlayerStatistics(request, OnModifyScore, OnError);
+    }
+    public Action ModifyScoreEvent;
+    void OnModifyScore(UpdatePlayerStatisticsResult result)
+    {
+        ModifyScoreEvent.Invoke();
     }
     
     public void ModifyMaxStreak(int maxStreak)
@@ -92,12 +97,13 @@ public class PlayfabManager : MonoBehaviour
                 }
             }
         };
-        PlayFabClientAPI.UpdatePlayerStatistics(request, OnModifyLeaderboard, OnError);
+        PlayFabClientAPI.UpdatePlayerStatistics(request, OnModifyMaxStreak, OnError);
     }
 
-    void OnModifyLeaderboard(UpdatePlayerStatisticsResult result)
+    public Action ModifyMaxStreakEvent;
+    void OnModifyMaxStreak(UpdatePlayerStatisticsResult result)
     {
-        Debug.Log("Leaderboard Modified Successfully");
+        ModifyMaxStreakEvent.Invoke();
     }
     public void GetScore()
     {

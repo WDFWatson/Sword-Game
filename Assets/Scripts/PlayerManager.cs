@@ -50,8 +50,7 @@ public class PlayerManager : MonoBehaviour
 
     public void Die()
     {
-        gameOverMenu.gameObject.SetActive(true);
-        gameOverMenu.Initialize(score, maxStreak);
+        StartCoroutine(gameOverMenu.Initialize(score, maxStreak) );
         TargetArea.instance.gameObject.SetActive(false);
         InputController.instance.sword.transform.position = new Vector3(0, 0, 20);
     }
